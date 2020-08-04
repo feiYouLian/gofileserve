@@ -21,7 +21,7 @@ type Result struct {
 
 const (
 	assetsDir       = "assets/"
-	address         = ":8888"
+	address         = ":8080"
 	staticURLPrefix = "/static/"
 )
 
@@ -97,9 +97,10 @@ func uploadHandle(w http.ResponseWriter, r *http.Request) {
 
 func checkAndMakeDateDir() string {
 	dateDir := time.Now().Format("2006-01-02")
-	_, err := os.Stat(filepath.Join(assetsDir, dateDir))
+	dir := filepath.Join(assetsDir, dateDir)
+	_, err := os.Stat(dir)
 	if os.IsNotExist(err) {
-		os.Mkdir(dateDir, os.ModePerm)
+		os.Mkdir(dir, os.ModePerm)
 	}
 	return dateDir
 }
